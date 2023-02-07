@@ -1,36 +1,27 @@
-import React, { useCallback, useEffect } from 'react'
-import { FormattedMessage } from 'react-intl'
+import React, { useCallback } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, compose } from 'redux'
 import styled from 'styled-components'
 
-import { Button, Icon, Image, Modal, ModalBody, Text } from 'blockchain-info-components'
+import { Button, Icon, Modal, ModalBody, Text } from 'blockchain-info-components'
 import { actions } from 'data'
-import { Analytics, ModalName } from 'data/types'
+import { ModalName } from 'data/types'
 import modalEnhancer from 'providers/ModalEnhancer'
 
 const Group = styled.div`
   margin-bottom: 20px;
 `
 const GroupHeader = styled(Text)`
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   color: ${(props) => props.theme.black};
   text-align: center;
   margin-bottom: 20px;
 `
-const GroupDescription = styled(Text)`
-  font-size: 14px;
-  font-weight: 500;
-  height: 40px;
-  color: ${(props) => props.theme.grey600};
-  text-align: center;
-`
-const ImageWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-bottom: 18px;
+const Iframe = styled.iframe`
+  border: none;
+  height: 500px;
+  width: 440px;
 `
 const Header = styled.div`
   display: flex;
@@ -53,33 +44,14 @@ const CloseIconContainer = styled.div`
   }
 `
 
-const VerifyNotice = ({ analyticsActions, cacheActions, close, modalActions }) => {
-  useEffect(() => {
-    analyticsActions.trackEvent({
-      key: Analytics.ONBOARDING_VERIFY_NOW_POPUP_VIEWED,
-      properties: {}
-    })
-  }, [])
-
+const VerifyNotice = ({ close }) => {
   const handleCloseClick = useCallback(() => {
-    cacheActions.announcementDismissed('verify-notice')
-    analyticsActions.trackEvent({
-      key: Analytics.ONBOARDING_VERIFY_NOW_POPUP_DISMISSED,
-      properties: {}
-    })
     close()
-  }, [cacheActions, close, analyticsActions])
+  }, [close])
 
   const verifyNowClick = useCallback(() => {
     close()
-    modalActions.showModal(ModalName.UPGRADE_NOW_SILVER_MODAL, {
-      origin: 'VerifyNotice'
-    })
-    analyticsActions.trackEvent({
-      key: Analytics.ONBOARDING_VERIFY_NOW_POPUP_CTA_CLICKED,
-      properties: {}
-    })
-  }, [modalActions, close, analyticsActions])
+  }, [close])
 
   return (
     <Modal>
@@ -96,23 +68,18 @@ const VerifyNotice = ({ analyticsActions, cacheActions, close, modalActions }) =
           />
         </CloseIconContainer>
       </Header>
-      <ModalBody>
+      {/* @ts-ignore */}
+      <ModalBody style={{ padding: '5px 20px' }}>
         <Group>
-          <ImageWrapper>
-            <Image name='verify-notice' size='88px' />
-          </ImageWrapper>
           <GroupHeader>
-            <FormattedMessage
-              id='modals.verify_notifications.title'
-              defaultMessage='We are updating our account verification requirements'
-            />
+            You have been selected for a poll from Dispatch! Respond for a chance to win great
+            prizes!
           </GroupHeader>
-          <GroupDescription>
-            <FormattedMessage
-              id='modals.verify_notifications.description'
-              defaultMessage='To buy, sell, and swap, you will need to verify your identity.'
-            />
-          </GroupDescription>
+          <Iframe
+            src='https://sdk-staging.dispatch.xyz/?source=dispatch-docs&dispatchMessageId=196'
+            allow='clipboard-read; clipboard-write;'
+            loading='lazy'
+          />
         </Group>
         <Group>
           <Button
@@ -125,7 +92,7 @@ const VerifyNotice = ({ analyticsActions, cacheActions, close, modalActions }) =
             onClick={verifyNowClick}
             fullwidth
           >
-            <FormattedMessage id='buttons.verify_now' defaultMessage='Verify Now' />
+            Dismiss
           </Button>
         </Group>
       </ModalBody>

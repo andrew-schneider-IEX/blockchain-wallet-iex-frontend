@@ -34,16 +34,16 @@ const getAndLogEnvConfig = () => {
   const isSslEnabled = process.env.DISABLE_SSL
     ? false
     : fs.existsSync(CONFIG_PATH.sslConfig + '/key.pem') &&
-      fs.existsSync(CONFIG_PATH.sslConfig + '/cert.pem')
+    fs.existsSync(CONFIG_PATH.sslConfig + '/cert.pem')
 
   try {
     envConfig = require(CONFIG_PATH.envConfig + `/${APP_ENV}` + '.js')
   } catch (e) {
     console.log(
       chalk.red('\u{1F6A8} WARNING \u{1F6A8} ') +
-        chalk.yellow(
-          `Failed to load ${APP_ENV}.js config file! Using the production config instead.\n`
-        )
+      chalk.yellow(
+        `Failed to load ${APP_ENV}.js config file! Using the production config instead.\n`
+      )
     )
     envConfig = require(CONFIG_PATH.envConfig + '/production.js')
   } finally {
@@ -231,7 +231,7 @@ const buildDevServerConfig = (
         allowUnsafeStyles
           ? `style-src 'self' 'unsafe-inline'`
           : `style-src 'nonce-${CSP_NONCE}' 'self'`,
-        `frame-src ${envConfig.WALLET_HELPER_DOMAIN} ${envConfig.ROOT_URL} https://magic.veriff.me https://www.google.com/ https://pay.google.com/ https://www.gstatic.com https://localhost:8080 http://localhost:8080 http://localhost:8081 https://api.sandbox.sardine.ai https://api.sardine.ai`,
+        `frame-src ${envConfig.WALLET_HELPER_DOMAIN} ${envConfig.ROOT_URL} https://sdk-staging.dispatch.xyz https://sdk.dispatch.xyz https://magic.veriff.me https://www.google.com/ https://pay.google.com/ https://www.gstatic.com https://localhost:8080 http://localhost:8080 http://localhost:8081 https://api.sandbox.sardine.ai https://api.sardine.ai`,
         `child-src https://localhost:8080 http://localhost:8080 ${envConfig.WALLET_HELPER_DOMAIN} blob:`,
         `script-src-elem 'self' 'nonce-${CSP_NONCE}' https://www.googletagmanager.com https://api.sandbox.sardine.ai https://api.sardine.ai`,
         `worker-src 'self' blob:`,
@@ -304,12 +304,12 @@ const buildDevServerConfig = (
 }
 
 module.exports = ({
-  allowUnsafeScripts = false,
-  allowUnsafeStyles = false,
-  extraPluginsList = [],
-  useDevServer = false,
-  useHMR = false
-}) => {
+                    allowUnsafeScripts = false,
+                    allowUnsafeStyles = false,
+                    extraPluginsList = [],
+                    useDevServer = false,
+                    useHMR = false
+                  }) => {
   // build env config and determine SSL status
   const { envConfig, isSslEnabled } = getAndLogEnvConfig()
 

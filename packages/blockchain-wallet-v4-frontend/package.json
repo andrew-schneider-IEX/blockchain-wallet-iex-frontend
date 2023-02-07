@@ -82,6 +82,7 @@
     "@blockchain-com/constellation": "0.2.16",
     "@blockchain-com/icons": "0.0.6",
     "@formatjs/intl-relativetimeformat": "7.2.10",
+    "@iex-xyz/sdk": "0.0.8",
     "@graphql-codegen/cli": "2.16.3",
     "@reduxjs/toolkit": "1.6.0",
     "@storybook/addon-actions": "6.3.6",

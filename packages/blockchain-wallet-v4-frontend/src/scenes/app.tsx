@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react'
+import React, { Suspense } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { connect, ConnectedProps, Provider } from 'react-redux'
 import { Redirect, Route, Switch } from 'react-router-dom'
@@ -20,12 +20,9 @@ import DexLayout from 'layouts/Dex'
 import NftsLayout from 'layouts/Nfts'
 import WalletLayout from 'layouts/Wallet'
 import WalletLoading from 'layouts/Wallet/template.loading'
-import { UTM } from 'middleware/analyticsMiddleware/constants'
-import { utmParser } from 'middleware/analyticsMiddleware/utils'
 import { MediaContextProvider } from 'providers/MatchMediaProvider'
 import ThemeProvider from 'providers/ThemeProvider'
 import TranslationsProvider from 'providers/TranslationsProvider'
-import { getTracking } from 'services/tracking'
 
 const queryClient = new QueryClient()
 
@@ -56,11 +53,7 @@ const Dex = React.lazy(() => import('./Dex'))
 
 // NFTs
 const NftsView = React.lazy(() => import('./Nfts/View'))
-const NftsFirehose = React.lazy(() => import('./Nfts/Firehose'))
-const NftsCollection = React.lazy(() => import('./Nfts/Collection/Collection'))
 const NftsAsset = React.lazy(() => import('./Nfts/AssetViewOnly'))
-const NftsAddress = React.lazy(() => import('./Nfts/Address/Address'))
-const NftsSettings = React.lazy(() => import('./Nfts/Settings'))
 
 // WALLET
 const Addresses = React.lazy(() => import('./Settings/Addresses'))
@@ -95,12 +88,6 @@ const App = ({
   userData
 }: Props) => {
   const Loading = isAuthenticated ? WalletLoading : AuthLoading
-  // parse and log UTMs
-  useEffect(() => {
-    const utm = utmParser()
-    sessionStorage.setItem(UTM, JSON.stringify(utm))
-    getTracking({ url: apiUrl })
-  }, [apiUrl])
 
   // lazy load google tag manager
   useDefer3rdPartyScript('https://www.googletagmanager.com/gtag/js?id=UA-52108117-5', {

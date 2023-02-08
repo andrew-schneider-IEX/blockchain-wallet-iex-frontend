@@ -11,6 +11,8 @@ export const getOpenSeaStatus = (state: RootState) => state.components.nfts.open
 export const getNftOwnerAssets = (state: RootState) => state.components.nfts.nftOwnerAssets
 export const getOrderFlow = (state: RootState) => state.components.nfts.orderFlow
 
+export const getDispatchSigner = (state: RootState) => state.components.nfts.dispatchSigner
+
 export const getIsTestnet = (state: RootState) =>
   selectors.core.walletOptions
     .getDomains(state)

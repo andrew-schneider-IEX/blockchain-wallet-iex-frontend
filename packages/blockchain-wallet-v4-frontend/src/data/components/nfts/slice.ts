@@ -33,6 +33,7 @@ const initialState: NftsStateType = {
   },
   collection: Remote.NotAsked,
   collections: Remote.NotAsked,
+  dispatchSigner: null,
   nftOwnerAssets: Remote.NotAsked,
   openSeaAsset: Remote.NotAsked,
   openSeaStatus: Remote.NotAsked,
@@ -370,10 +371,15 @@ const nftsSlice = createSlice({
     fetchOpenseaStatusSuccess: (state, action: PayloadAction<OpenSeaStatus>) => {
       state.openSeaStatus = Remote.Success(action.payload)
     },
+    // @ts-ignore
+    getDispatchSigner: (state) => {},
+
     handleRouterChange: (state, action: PayloadAction<{ location: { pathname: string } }>) => {},
+
     nftOrderFlowClose: (state) => {
       state.orderFlow = initialState.orderFlow
     },
+
     nftOrderFlowOpen: (
       state,
       action: PayloadAction<
@@ -430,6 +436,7 @@ const nftsSlice = createSlice({
         state.orderFlow.wyvernOrder = action.payload.wyvernOrder
       }
     },
+
     nftOrderFlowOpen_LEGACY: (
       state,
       action: PayloadAction<
@@ -477,13 +484,17 @@ const nftsSlice = createSlice({
         state.orderFlow.wyvernOrder = action.payload.order
       }
     },
+
     nftSearch: (state, action: PayloadAction<{ search: string }>) => {},
+
     nftSearchFailure: (state, action: PayloadAction<string>) => {
       state.search = Remote.Failure(action.payload)
     },
+
     nftSearchLoading: (state) => {
       state.search = Remote.Loading
     },
+
     nftSearchSuccess: (state, action: PayloadAction<ExplorerGatewaySearchType>) => {
       state.search = Remote.Success(action.payload)
     },
@@ -505,6 +516,9 @@ const nftsSlice = createSlice({
     setAssetData: (state, action: PayloadAction<{ collection?: string; page?: number }>) => {
       state.assets.collection = action.payload.collection || 'all'
       state.assets.page = action.payload.page || 0
+    },
+    setDispatchSigner: (state, action: PayloadAction<any>) => {
+      state.dispatchSigner = action.payload
     },
     setNftOrderStatus: (state, action: PayloadAction<NftOrderStatusEnum>) => {
       state.orderFlow.status = action.payload

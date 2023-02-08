@@ -1466,6 +1466,13 @@ export default ({ api, coreSagas, networks }: { api: APIType; coreSagas; network
   }
   // TODO: SEAPORT - remove wyvern 👆
 
+  // @ts-ignore
+  // eslint-disable-next-line require-yield
+  const getDispatchSigner = function* (action) {
+    const signer = yield call(getEthSigner)
+    yield put(A.setDispatchSigner(signer))
+  }
+
   return {
     acceptOffer,
     acceptOffer_LEGACY,
@@ -1488,6 +1495,7 @@ export default ({ api, coreSagas, networks }: { api: APIType; coreSagas; network
     fetchOpenSeaAsset,
     fetchOpenseaStatus,
     formChanged,
+    getDispatchSigner,
     handleRouterChange,
     nftOrderFlowOpen,
     nftSearch,

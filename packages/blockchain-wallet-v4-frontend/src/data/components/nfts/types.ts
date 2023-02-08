@@ -53,6 +53,7 @@ export type NftsStateType = {
   }
   collection: RemoteDataType<string, NftCollection>
   collections: RemoteDataType<string, ExplorerGatewayNftCollectionType[]>
+  dispatchSigner: any
   nftOwnerAssets: RemoteDataType<OwnerNftBalance, OwnerNftBalance>
   openSeaAsset: RemoteDataType<string, NftAsset>
   openSeaStatus: RemoteDataType<

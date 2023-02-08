@@ -38,5 +38,6 @@ export default ({ api, coreSagas, networks }) => {
     yield takeLatest(actions.createOffer_LEGACY, nftsSagas.createOffer_LEGACY)
     yield takeLatest(actions.createOrder_LEGACY, nftsSagas.createOrder_LEGACY)
     yield takeLatest(actions.nftOrderFlowOpen_LEGACY, nftsSagas.nftOrderFlowOpen)
+    yield takeLatest(actions.getDispatchSigner, nftsSagas.getDispatchSigner)
   }
 }

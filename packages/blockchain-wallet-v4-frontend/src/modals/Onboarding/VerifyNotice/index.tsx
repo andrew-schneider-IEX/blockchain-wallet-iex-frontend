@@ -4,6 +4,7 @@ import { bindActionCreators, compose } from 'redux'
 import styled from 'styled-components'
 
 import { Button, Icon, Modal, ModalBody, Text } from 'blockchain-info-components'
+import DispatchCard from 'components/DispatchCard'
 import { actions } from 'data'
 import { ModalName } from 'data/types'
 import modalEnhancer from 'providers/ModalEnhancer'
@@ -17,11 +18,6 @@ const GroupHeader = styled(Text)`
   color: ${(props) => props.theme.black};
   text-align: center;
   margin-bottom: 20px;
-`
-const Iframe = styled.iframe`
-  border: none;
-  height: 500px;
-  width: 440px;
 `
 const Header = styled.div`
   display: flex;
@@ -69,17 +65,13 @@ const VerifyNotice = ({ close }) => {
         </CloseIconContainer>
       </Header>
       {/* @ts-ignore */}
-      <ModalBody style={{ padding: '5px 20px' }}>
+      <ModalBody style={{ padding: '5px' }}>
         <Group>
           <GroupHeader>
-            You have been selected for a poll from Dispatch! Respond for a chance to win great
-            prizes!
+            As a thank you for being a loyal customer, here is a special offer from our partner,
+            Dispatch!
           </GroupHeader>
-          <Iframe
-            src='https://sdk-staging.dispatch.xyz/?source=dispatch-docs&dispatchMessageId=196'
-            allow='clipboard-read; clipboard-write;'
-            loading='lazy'
-          />
+          <DispatchCard messageId='269' />
         </Group>
         <Group>
           <Button

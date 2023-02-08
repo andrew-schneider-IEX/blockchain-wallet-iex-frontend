@@ -99,37 +99,37 @@ const Header = (props: OwnProps) => {
       text: <FormattedMessage id='copy.prices' defaultMessage='Prices' />
     },
     {
-      dest: '/earn',
-      e2e: 'earnLink',
+      dest: '/inbox',
+      e2e: 'inboxLink',
       isNew: true,
-      text: <FormattedMessage id='copy.earn' defaultMessage='Earn' />
+      text: <FormattedMessage id='copy.inbox' defaultMessage='Inbox' />
     }
   ]
 
-  if (invitations.nftBuySell) {
-    primaryNavItems.push({
-      dest: '/nfts/view',
-      e2e: 'nftsLink',
-      text: <FormattedMessage id='layouts.wallet.menuleft.navigation.nfts' defaultMessage='NFTs' />
-    })
-  }
-
-  if (walletDebitCardEnabled) {
-    primaryNavItems.push({
-      dest: '/debit-card',
-      e2e: 'debitCardLink',
-      text: <FormattedMessage id='copy.card' defaultMessage='Card' />
-    })
-  }
-
-  if (featureFlags.dex) {
-    primaryNavItems.push({
-      dest: '/dex',
-      e2e: 'dexLink',
-      isNew: true,
-      text: <FormattedMessage id='copy.dex' defaultMessage='DEX' />
-    })
-  }
+  // if (invitations.nftBuySell) {
+  //   primaryNavItems.push({
+  //     dest: '/nfts/view',
+  //     e2e: 'nftsLink',
+  //     text: <FormattedMessage id='layouts.wallet.menuleft.navigation.nfts' defaultMessage='NFTs' />
+  //   })
+  // }
+  //
+  // if (walletDebitCardEnabled) {
+  //   primaryNavItems.push({
+  //     dest: '/debit-card',
+  //     e2e: 'debitCardLink',
+  //     text: <FormattedMessage id='copy.card' defaultMessage='Card' />
+  //   })
+  // }
+  //
+  // if (featureFlags.dex) {
+  //   primaryNavItems.push({
+  //     dest: '/dex',
+  //     e2e: 'dexLink',
+  //     isNew: true,
+  //     text: <FormattedMessage id='copy.dex' defaultMessage='DEX' />
+  //   })
+  // }
 
   return (
     <Navbar

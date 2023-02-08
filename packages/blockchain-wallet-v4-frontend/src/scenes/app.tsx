@@ -48,6 +48,8 @@ const VerifyAccountRecovery = React.lazy(() => import('./RecoverWallet/EmailAuth
 const VerifyEmailToken = React.lazy(() => import('./VerifyEmailToken'))
 const VerifyEmail = React.lazy(() => import('./VerifyEmail'))
 
+const Inbox = React.lazy(() => import('./Inbox'))
+
 // DEX
 const Dex = React.lazy(() => import('./Dex'))
 
@@ -249,6 +251,7 @@ const App = ({
                             <WalletLayout path='/settings/general' component={General} />
                             <WalletLayout path='/settings/preferences' component={Preferences} />
                             <WalletLayout path='/prices' component={Prices} />
+                            <WalletLayout path='/inbox' component={Inbox} />
                             <WalletLayout path='/tax-center' component={TaxCenter} />
                             <WalletLayout
                               path='/coins/:coin'
